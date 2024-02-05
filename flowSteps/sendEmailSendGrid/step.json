@@ -1,6 +1,6 @@
 {
   "label": "Send email to SendGrid",
-  "name": "sendEmailSendgrid",
+  "name": "sendEmailSendGrid",
   "category": "integrations",
   "description": "This flow step send email via SendGrid",
   "inputs": [

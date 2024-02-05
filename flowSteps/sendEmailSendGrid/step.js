@@ -16,7 +16,7 @@
  * {number} connectionTimeout, Read timeout interval, in milliseconds.
  * {number} readTimeout, Connect timeout interval, in milliseconds.
  */
-step.sendEmailSendgrid = function (inputs) {
+step.sendEmailSendGrid = function (inputs) {
 
 	var inputsLogic = {
 		from: inputs.from || "",

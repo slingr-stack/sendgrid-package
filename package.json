@@ -62,12 +62,12 @@
         {
             "type": "flowStep",
             "namespace": "apiCallSendGrid",
-            "path": "/flowSteps/apiCallSendgrid"
+            "path": "/flowSteps/apiCallSendGrid"
         },
         {
             "type": "flowStep",
-            "namespace": "sendEmailSendgrid",
-            "path": "/flowSteps/sendEmailSendgrid"
+            "namespace": "sendEmailSendGrid",
+            "path": "/flowSteps/sendEmailSendGrid"
         }
     ]
 }
