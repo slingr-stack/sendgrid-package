@@ -1,63 +1,27 @@
 {
-    "name": "skeleton",
-    "label": "Skeleton Package",
+    "name": "sendgrid",
+    "label": "SendGrid Package",
     "dependencies": [
         {
             "type": "service",
             "name": "http",
             "version": "v1.3.7",
             "instanceId": "shared"
-        },
-        {
-            "type": "package",
-            "name": "oauth",
-            "version": "v1.0.19"
         }
     ],
-    "configurationBuilder": "/configurationBuilder.js",
     "configuration": [
         {
-            "name": "SKELETON_API_BASE_URL",
-            "label": "Skeleton Api Url",
-            "type": "label",
-            "value": "https://example.com/"
-        },
-        {
-            "name": "choice",
-            "label": "Choice",
-            "required": false,
-            "defaultValue": "true",
-            "type": "buttonsGroup",
-            "typeOptions": {
-                "allowCustom": true,
-                "possibleValues": [
-                    {
-                        "label": "True",
-                        "name": "true"
-                    },
-                    {
-                        "label": "False",
-                        "name": "false"
-                    },
-                    {
-                        "label": "Other",
-                        "name": "other"
-                    }
-                ]
-            }
-        },
-        {
-            "name": "text",
-            "label": "Text",
+            "name": "apiKey",
+            "label": "API key",
+            "description": "API key",
             "type": "text",
-            "required": "false",
-            "visibility": "config.choice == 'true'"
+            "required": true
         },
         {
-            "name": "info",
-            "label": "info",
+            "name": "SENDGRID_API_BASE_URL",
+            "label": "SendGrid Api Url",
             "type": "label",
-            "value": "'info'"
+            "value": "https://api.sendgrid.com/v3"
         }
     ],
     "events": [
@@ -70,6 +34,11 @@
             "label": "Callback",
             "name": "callback",
             "description": "Happens when a async process is finished"
+        },
+        {
+            "label": "File Downloaded",
+            "name": "fileDownloaded",
+            "description": "Happens when a async download file process is finished (thrown by a GET function with 'forceDownload' enabled and 'downloadSync' disabled)"
         }
     ],
     "metadata": [
@@ -85,18 +54,13 @@
         },
         {
             "type": "flowStep",
-            "namespace": "apiCallSkeleton",
-            "path": "/flowSteps/apiCallSkeleton"
+            "namespace": "apiCallSendGrid",
+            "path": "/flowSteps/apiCallSendgrid"
         },
         {
             "type": "flowStep",
-            "namespace": "customFlow",
-            "path": "/flowSteps/customFlow"
-        },
-        {
-            "type": "uiService",
-            "namespace": "testUiService",
-            "path": "/uiServices/testUiService"
+            "namespace": "sendEmailSendgrid",
+            "path": "/flowSteps/sendEmailSendgrid"
         }
     ]
 }

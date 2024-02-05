@@ -8,31 +8,35 @@
     </thead>
     <tbody>
     <tr>
-        <td>Skeleton package</td>
-        <td>January 3, 2024</td>
-        <td>Detailed description of the API of the Skeleton package.</td>
+        <td>SendGrid package</td>
+        <td>February 5, 2024</td>
+        <td>SendGrid is an email delivery and marketing platform that allows businesses to send and manage their email campaigns.</td>
     </tr>
     </tbody>
 </table>
 
 # Overview
 
+SendGrid is an email delivery and marketing platform that allows businesses to send and manage their email campaigns.
+
 # Javascript API
 
-The Javascript API of the skeleton package has two pieces:
+The Javascript API of the sendgrid package has two pieces:
 
 - **HTTP requests**
 - **Flow steps**
 
 ## HTTP requests
-You can make `GET`,`PUT`,`PATCH`,`DELETE` requests to the [skeleton API](API_URL_HERE) like this:
+You can make `GET`,`POST`,`PATCH`,`PUT`,`DELETE` requests to the [sendgrid API](https://docs.sendgrid.com/for-developers/sending-email/api-getting-started) like this:
 ```javascript
-var response = pkg.skeleton.api.get('/path3')
-var response = pkg.skeleton.api.put('/path1/:testPath', body)
-var response = pkg.skeleton.api.put('/path1/:testPath')
-var response = pkg.skeleton.api.patch('/path2?param2=' + httpOptions.query.param2 + '&param3=' + httpOptions.query.param3 + '', body)
-var response = pkg.skeleton.api.patch('/path2?param2=' + httpOptions.query.param2 + '&param3=' + httpOptions.query.param3 + '')
-var response = pkg.skeleton.api.delete('/path4')
+var response = app.endpoints.sendgrid.get('/ips/pools')
+var response = app.endpoints.sendgrid.post('/validations/email', body)
+var response = app.endpoints.sendgrid.post('/validations/email')
+var response = app.endpoints.sendgrid.patch('/tracking_settings/google_analytics', body)
+var response = app.endpoints.sendgrid.patch('/tracking_settings/google_analytics')
+var response = app.endpoints.sendgrid.put('/marketing/contacts/imports', body)
+var response = app.endpoints.sendgrid.put('/marketing/contacts/imports')
+var response = app.endpoints.sendgrid.delete('/suppression/bounces')
 ```
 
 Please take a look at the documentation of the [HTTP service](https://github.com/slingr-stack/http-service)
@@ -205,7 +209,6 @@ For more information about how shortcuts or flow steps work, and how they are ge
 
 ## Dependencies
 * HTTP Service (v1.3.7)
-* Oauth Package (v1.0.19) // TODO review and remove if its needed
 
 ## About SLINGR
 
