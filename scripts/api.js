@@ -273,7 +273,7 @@ let SendGrid = function (options) {
 
 function setApiUri(options) {
     let url = options.path || "";
-    options.url = API_URL + url;
+    options.url = config.get("SENDGRID_API_BASE_URL") + url;
     sys.logs.debug('[sendgrid] Set url: ' + options.path + "->" + options.url);
     return options;
 }
