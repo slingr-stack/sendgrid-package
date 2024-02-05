@@ -18,6 +18,13 @@
             "required": true
         },
         {
+            "name": "webhooksUrl",
+            "label": "Webhooks URL",
+            "description": "The URL to configure in webhooks of your SendGrid App",
+            "type": "label",
+            "value": "config.WEBHOOK_URL"
+        },
+        {
             "name": "SENDGRID_API_BASE_URL",
             "label": "SendGrid Api Url",
             "type": "label",
