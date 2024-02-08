@@ -29,14 +29,14 @@ The Javascript API of the sendgrid package has two pieces:
 ## HTTP requests
 You can make `GET`,`POST`,`PATCH`,`PUT`,`DELETE` requests to the [sendgrid API](https://docs.sendgrid.com/for-developers/sending-email/api-getting-started) like this:
 ```javascript
-var response = app.endpoints.sendgrid.get('/ips/pools')
-var response = app.endpoints.sendgrid.post('/validations/email', body)
-var response = app.endpoints.sendgrid.post('/validations/email')
-var response = app.endpoints.sendgrid.patch('/tracking_settings/google_analytics', body)
-var response = app.endpoints.sendgrid.patch('/tracking_settings/google_analytics')
-var response = app.endpoints.sendgrid.put('/marketing/contacts/imports', body)
-var response = app.endpoints.sendgrid.put('/marketing/contacts/imports')
-var response = app.endpoints.sendgrid.delete('/suppression/bounces')
+var response = pkg.sendgrid.api.get('/ips/pools')
+var response = pkg.sendgrid.api.post('/validations/email', body)
+var response = pkg.sendgrid.api.post('/validations/email')
+var response = pkg.sendgrid.api.patch('/tracking_settings/google_analytics', body)
+var response = pkg.sendgrid.api.patch('/tracking_settings/google_analytics')
+var response = pkg.sendgrid.api.put('/marketing/contacts/imports', body)
+var response = pkg.sendgrid.api.put('/marketing/contacts/imports')
+var response = pkg.sendgrid.api.delete('/suppression/bounces')
 ```
 
 Please take a look at the documentation of the [HTTP service](https://github.com/slingr-stack/http-service)
@@ -208,7 +208,7 @@ Generic flow step for full use of the entire package and its services.
 For more information about how shortcuts or flow steps work, and how they are generated, take a look at the [slingr-helpgen tool](https://github.com/slingr-stack/slingr-helpgen).
 
 ## Dependencies
-* HTTP Service (v1.3.7)
+* HTTP Service (v1.4.1)
 
 ## About SLINGR
 
