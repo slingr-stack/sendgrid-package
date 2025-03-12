@@ -3,7 +3,7 @@
  ****************************************************/
 
 listeners.defaultWebhookSendGrid = {
-    label: 'Catch HTTP sendgrid events',
+    label: 'Catch HTTP SendGrid events',
     type: 'service',
     options: {
         service: 'http',
@@ -13,17 +13,7 @@ listeners.defaultWebhookSendGrid = {
         }
     },
     callback: function(event) {
-        sys.logs.info('Received SendGrid webhook. Processing and triggering a package event.');
-        var body = JSON.stringify(event.data.body);
-        var params = event.data.parameters;
-        if(true) {
-            sys.logs.info('Valid webhook received. Triggering event.');
-            sys.events.triggerEvent('sendgrid:webhook', {
-                body: body,
-                params: params
-            });
-            return "ok";
-        }
-        else throw new Error("Invalid webhook");
+        sys.logs.info('[sendgrid] Received SendGrid webhook. Processing and triggering a package event.', event);
+        sys.events.triggerEvent('sendgrid:webhook', event.data);
     }
 };
