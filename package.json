@@ -1,18 +1,17 @@
 {
     "name": "sendgrid",
-    "label": "SendGrid Package",
+    "label": "SendGrid",
     "dependencies": [
         {
             "type": "service",
             "name": "http",
-            "version": "v1.3.7",
-            "instanceId": "shared"
+            "version": "v1.8.5"
         }
     ],
     "configuration": [
         {
             "name": "apiKey",
-            "label": "API key",
+            "label": "API Key",
             "description": "API key",
             "type": "text",
             "required": true
@@ -26,7 +25,7 @@
         },
         {
             "name": "SENDGRID_API_BASE_URL",
-            "label": "SendGrid Api Url",
+            "label": "SendGrid API URL",
             "type": "label",
             "value": "https://api.sendgrid.com/v3"
         }
@@ -55,19 +54,14 @@
             "path": "/scripts/api.js"
         },
         {
+            "type": "script",
+            "namespace": "utils",
+            "path": "/scripts/utils.js"
+        },
+        {
             "type": "listener",
             "namespace": "webhook",
             "path": "/listeners/webhook.js"
-        },
-        {
-            "type": "flowStep",
-            "namespace": "apiCallSendGrid",
-            "path": "/flowSteps/apiCallSendGrid"
-        },
-        {
-            "type": "flowStep",
-            "namespace": "sendEmailSendGrid",
-            "path": "/flowSteps/sendEmailSendGrid"
         }
     ]
 }

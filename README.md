@@ -1,37 +1,39 @@
-<table class="table" style="margin-top: 10px">
-    <thead>
-    <tr>
-        <th>Title</th>
-        <th>Last Updated</th>
-        <th>Summary</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>SendGrid package</td>
-        <td>February 5, 2024</td>
-        <td>SendGrid is an email delivery and marketing platform that allows businesses to send and manage their email campaigns.</td>
-    </tr>
-    </tbody>
-</table>
-
 # Overview
 
+Repo: [https://github.com/slingr-stack/sendgrid-package](https://github.com/slingr-stack/sendgrid-package)
+
+This [package](https://platform-docs.slingr.io/dev-reference/data-model-and-logic/packages/) provides direct access to the SendGrid API.
 SendGrid is an email delivery and marketing platform that allows businesses to send and manage their email campaigns.
 
-# Javascript API
+## Configuration
 
-The Javascript API of the sendgrid package has two pieces:
+#### API Key
+API key given by SendGrid. You can find it in [SendGrid](https://app.sendgrid.com/settings/api_keys) once you have an account created.
 
-- **HTTP requests**
-- **Flow steps**
+**Name**: `apiKey`
+**Type**: text
+**Mandatory**: true
 
-## HTTP requests
-You can make `GET`,`POST`,`PATCH`,`PUT`,`DELETE` requests to the [sendgrid API](https://docs.sendgrid.com/for-developers/sending-email/api-getting-started) like this:
+#### Webhooks URL
+The URL to configure in webhooks of your SendGrid App.
+(Refer to the [SendGrid documentation](https://www.twilio.com/docs/sendgrid/for-developers/tracking-events/getting-started-event-webhook#add-an-event-webhook).)
+
+**Name**: `webhooksUrl`
+**Type**: label
+
+#### SendGrid API URL
+The base URL of the Twilio API where requests are sent.
+
+**Name**: `SENDGRID_API_BASE_URL`
+**Type**: label
+
+## JavaScript API
+
+### HTTP requests
+You can make `GET`,`POST`,`OPTIONS`,`PUT`,`DELETE` requests to the [sendgrid API](https://docs.sendgrid.com/for-developers/sending-email/api-getting-started) like this:
 ```javascript
+var response = pkg.sendgrid.api.post('/mail/send', {"personalizations":[{"to":[{"email":"john.doe@example.com","name":"John Doe"}],"subject":"Hello, World!"}],"content": [{"type": "text/plain", "value": "Heya!"}],"from":{"email":"sam.smith@example.com","name":"Sam Smith"},"reply_to":{"email":"sam.smith@example.com","name":"Sam Smith"}})
 var response = pkg.sendgrid.api.get('/ips/pools')
-var response = pkg.sendgrid.api.post('/validations/email', body)
-var response = pkg.sendgrid.api.post('/validations/email')
 var response = pkg.sendgrid.api.patch('/tracking_settings/google_analytics', body)
 var response = pkg.sendgrid.api.patch('/tracking_settings/google_analytics')
 var response = pkg.sendgrid.api.put('/marketing/contacts/imports', body)
@@ -39,182 +41,23 @@ var response = pkg.sendgrid.api.put('/marketing/contacts/imports')
 var response = pkg.sendgrid.api.delete('/suppression/bounces')
 ```
 
-Please take a look at the documentation of the [HTTP service](https://github.com/slingr-stack/http-service)
+Please note that if you receive a 403 error (forbidden access) when making requests, it is possible that you do not have this feature enabled in the Sendgrid plan you have purchased. 
+Refer to the documentation of the [HTTP service](https://github.com/slingr-stack/http-service)
 for more information about generic requests.
 
-## Flow Step
+## Events
+### Webhook
 
-As an alternative option to using scripts, you can make use of Flows and Flow Steps specifically created for the package:
-<details>
-    <summary>Click here to see the Flow Steps</summary>
-
-<br>
-
-### Generic Flow Step
-
-Generic flow step for full use of the entire package and its services.
-
-<h3>Inputs</h3>
-
-<table>
-    <thead>
-    <tr>
-        <th>Label</th>
-        <th>Type</th>
-        <th>Required</th>
-        <th>Default</th>
-        <th>Visibility</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>URL (Method)</td>
-        <td>choice</td>
-        <td>yes</td>
-        <td> - </td>
-        <td>Always</td>
-        <td>
-            This is the http method to be used against the package. <br>
-            Possible values are: <br>
-            <i><strong>GET,PUT,PATCH,DELETE</strong></i>
-        </td>
-    </tr>
-    <tr>
-        <td>URL (Path)</td>
-        <td>choice</td>
-        <td>yes</td>
-        <td> - </td>
-        <td>Always</td>
-        <td>
-            The url to which this package will send the request. This is the exact service to which the http request will be made. <br>
-            Possible values are: <br>
-            <i><strong>/testPath<br>/path3<br>/path1/{testPath}<br>/path2?param2=' + httpOptions.query.param2 + '&param3=' + httpOptions.query.param3 + '<br>/path4<br></strong></i>
-        </td>
-    </tr>
-    <tr>
-        <td>Headers</td>
-        <td>keyValue</td>
-        <td>no</td>
-        <td> - </td>
-        <td>Always</td>
-        <td>
-            Used when you want to have a custom http header for the request.
-        </td>
-    </tr>
-    <tr>
-        <td>Query Params</td>
-        <td>keyValue</td>
-        <td>no</td>
-        <td> - </td>
-        <td>Always</td>
-        <td>
-            Used when you want to have a custom query params for the http call.
-        </td>
-    </tr>
-    <tr>
-        <td>Body</td>
-        <td>json</td>
-        <td>no</td>
-        <td> - </td>
-        <td>Always</td>
-        <td>
-            A payload of data can be sent to the server in the body of the request.
-        </td>
-    </tr>
-    <tr>
-        <td>Override Settings</td>
-        <td>boolean</td>
-        <td>no</td>
-        <td> false </td>
-        <td>Always</td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Follow Redirect</td>
-        <td>boolean</td>
-        <td>no</td>
-        <td> false </td>
-        <td> overrideSettings </td>
-        <td>It Indicates that the resource has to be downloaded into a file instead of returning it in the response.</td>
-    </tr>
-    <tr>
-        <td>Download</td>
-        <td>boolean</td>
-        <td>no</td>
-        <td> false </td>
-        <td> overrideSettings </td>
-        <td>If true, the method won't return until the file has been downloaded, and it will return all the information of the file.</td>
-    </tr>
-    <tr>
-        <td>File name</td>
-        <td>text</td>
-        <td>no</td>
-        <td></td>
-        <td> overrideSettings </td>
-        <td>If provided, the file will be stored with this name. If empty, the file name will be calculated from the URL.</td>
-    </tr>
-    <tr>
-        <td>Full response</td>
-        <td> boolean </td>
-        <td>no</td>
-        <td> false </td>
-        <td> overrideSettings </td>
-        <td>Includes extended information about response</td>
-    </tr>
-    <tr>
-        <td>Connection Timeout</td>
-        <td> number </td>
-        <td>no</td>
-        <td> 5000 </td>
-        <td> overrideSettings </td>
-        <td>Connect a timeout interval in milliseconds (0 = infinity).</td>
-    </tr>
-    <tr>
-        <td>Read Timeout</td>
-        <td> number </td>
-        <td>no</td>
-        <td> 60000 </td>
-        <td> overrideSettings </td>
-        <td>Read a timeout interval in milliseconds (0 = infinity).</td>
-    </tr>
-    </tbody>
-</table>
-
-<h3>Outputs</h3>
-
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>response</td>
-        <td>object</td>
-        <td>
-            Object resulting from the response to the package call.
-        </td>
-    </tr>
-    </tbody>
-</table>
-
-
-</details>
-
-For more information about how shortcuts or flow steps work, and how they are generated, take a look at the [slingr-helpgen tool](https://github.com/slingr-stack/slingr-helpgen).
+Incoming webhook events are automatically captured by the default listener named `Catch HTTP SendGrid events`, which can be found below the `Scripts` section. Alternatively, you have the option to create a new package listener. For more information, please refer to the [Listeners Documentation](https://platform-docs.slingr.io/dev-reference/data-model-and-logic/listeners/). Refer to the SendGrid [Webhooks](https://www.twilio.com/docs/sendgrid/for-developers/tracking-events/getting-started-event-webhook#add-an-event-webhook) documentation for more information.
 
 ## Dependencies
-* HTTP Service (v1.4.1)
+* HTTP Service
 
-## About SLINGR
+## About Slingr
 
-SLINGR is a low-code rapid application development platform that accelerates development, with robust architecture for integrations and executing custom workflows and automation.
+Slingr is a low-code rapid application development platform that accelerates development, with robust architecture for integrations and executing custom workflows and automation.
 
-[More info about SLINGR](https://slingr.io)
+[More info about Slingr](https://slingr.io)
 
 ## License
 
